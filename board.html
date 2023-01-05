@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <link type="text/css" rel="stylesheet" href="board_styles.css">
+    </head>
+
+    <!-- <div class="piece" id="wrook" draggable="true">♖</div>
+    <div class="piece" id="brook" draggable="true">♜</div>
+
+    <div class="piece" id="wknight" draggable="true">♘</div>
+    <div class="piece" id="bknight" draggable="true">♞</div>
+
+    <div class="piece" id="wbish" draggable="true">♗</div>
+    <div class="piece" id="bbish" draggable="true">♝</div>
+
+    <div class="piece" id="wpawn" draggable="true">♙</div>
+    <div class="piece" id="bpawn" draggable="true">♟</div>
+
+    <div class="piece" id="wking" draggable="true">♔</div>
+    <div class="piece" id="bking" draggable="true">♚</div>
+
+    <div class="piece" id="wqueen" draggable="true">♕</div>
+    <div class="piece" id="bqueen" draggable="true">♛</div>
+
+     
+     -->
+    <body>
+        <table class="chess-board">
+            <tbody>
+                <tr>
+                    <th></th>
+                    <th>a</th>
+                    <th>b</th>
+                    <th>c</th>
+                    <th>d</th>
+                    <th>e</th>
+                    <th>f</th>
+                    <th>g</th>
+                    <th>h</th>
+                </tr>
+                <tr>
+                    <th>8</th>
+                    <td class="light" id="ba8"><div class="piece" id="brook" draggable="true">♜</div></td>
+                    <td class="dark" id="bb8"><div class="piece" id="bknight" draggable="true">♞</div></td>
+                    <td class="light" id="bc8"><div class="piece" id="bbish" draggable="true">♝</div></td>
+                    <td class="dark" id="bd8"><div class="piece" id="bqueen" draggable="true">♛</div></td>
+                    <td class="light" id="be8"><div class="piece" id="bking" draggable="true">♚</div></td>
+                    <td class="dark" id="bf8"><div class="piece" id="bbish" draggable="true">♝</div></td>
+                    <td class="light" id="bg8"><div class="piece" id="bknight" draggable="true">♞</div></td>
+                    <td class="dark" id="bh8"><div class="piece" id="brook" draggable="true">♜</div></td>
+                </tr>
+                <tr>
+                    <th>7</th>
+                    <td class="dark" id="ba7"><div class="piece" id="bpawn" draggable="true">♟</div></td>
+                    <td class="light" id="bb7"><div class="piece" id="bpawn" draggable="true">♟</div></td>
+                    <td class="dark" id="bc7"><div class="piece" id="bpawn" draggable="true">♟</div></td>
+                    <td class="light" id="bd7"><div class="piece" id="bpawn" draggable="true">♟</div></td>
+                    <td class="dark" id="be7"><div class="piece" id="bpawn" draggable="true">♟</div></td>
+                    <td class="light" id="bf7"><div class="piece" id="bpawn" draggable="true">♟</div></td>
+                    <td class="dark" id="bg7"><div class="piece" id="bpawn" draggable="true">♟</div></td>
+                    <td class="light" id="bh7"><div class="piece" id="bpawn" draggable="true">♟</div></td>
+                </tr>
+                <tr>
+                    <th>6</th>
+                    <td class="light" id="ea6"></td>
+                    <td class="dark" id="eb6"></td>
+                    <td class="light" id="ec6"></td>
+                    <td class="dark" id="ed6"></td>
+                    <td class="light" id="ee6"></td>
+                    <td class="dark" id="ef6"></td>
+                    <td class="light" id="eg6"></td>
+                    <td class="dark" id="eh6"></td>
+                </tr>
+                <tr>
+                    <th>5</th>
+                    <td class="dark" id="ea5"></td>
+                    <td class="light" id="eb5"></td>
+                    <td class="dark" id="ec5"></td>
+                    <td class="light" id="ed5"></td>
+                    <td class="dark" id="ee5"></td>
+                    <td class="light" id="ef5"></td>
+                    <td class="dark" id="eg5"></td>
+                    <td class="light" id="eh5"></td>
+                </tr>
+                <tr>
+                    <th>4</th>
+                    <td class="light" id="ea4"></td>
+                    <td class="dark" id="eb4"></td>
+                    <td class="light" id="ec4"></td>
+                    <td class="dark" id="ed4"></td>
+                    <td class="light" id="ee4"></td>
+                    <td class="dark" id="ef4"></td>
+                    <td class="light" id="eg4"></td>
+                    <td class="dark" id="eh4"></td>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <td class="dark" id="ea3"></td>
+                    <td class="light" id="eb3"></td>
+                    <td class="dark" id="ec3"></td>
+                    <td class="light" id="ed3"></td>
+                    <td class="dark" id="ee3"></td>
+                    <td class="light" id="ef3"></td>
+                    <td class="dark" id="eg3"></td>
+                    <td class="light" id="eh3"></td>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <td class="light" id="wa2"><div class="piece" id="wpawn" draggable="true">♙</div></td>
+                    <td class="dark" id="wb2"><div class="piece" id="wpawn" draggable="true">♙</div></td>
+                    <td class="light" id="wc2"><div class="piece" id="wpawn" draggable="true">♙</div></td>
+                    <td class="dark" id="wd2"><div class="piece" id="wpawn" draggable="true">♙</div></td>
+                    <td class="light" id="we2"><div class="piece" id="wpawn" draggable="true">♙</div></td>
+                    <td class="dark" id="wf2"><div class="piece" id="wpawn" draggable="true">♙</div></td>
+                    <td class="light" id="wg2"><div class="piece" id="wpawn" draggable="true">♙</div></td>
+                    <td class="dark" id="wh2"><div class="piece" id="wpawn" draggable="true">♙</div></td>
+                </tr>
+                <tr>
+                    <th>1</th>
+                    <td class="dark" id="wa1"><div class="piece" id="wrook" draggable="true">♖</div></td>
+                    <td class="light" id="wb1"><div class="piece" id="wknight" draggable="true">♘</div></td>
+                    <td class="dark" id="wc1"><div class="piece" id="wbish" draggable="true">♗</div></td>
+                    <td class="light" id="wd1"><div class="piece" id="wqueen" draggable="true">♕</div></td>
+                    <td class="dark" id="we1"><div class="piece" id="wking" draggable="true">♔</div></td>
+                    <td class="light" id="wf1"><div class="piece" id="wbish" draggable="true">♗</div></td>
+                    <td class="dark" id="wg1"><div class="piece" id="wknight" draggable="true">♘</div></td>
+                    <td class="light" id="wh1"><div class="piece" id="wrook" draggable="true">♖</div></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+    <script src="./board.js"></script>
+    <div id="move" class="w"></div>
+</html>
