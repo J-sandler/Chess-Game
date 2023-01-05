@@ -1,4 +1,10 @@
+//globals
 var draggedRef = null;
+const moves=[];
+let winner="black";
+var gameEnd=false;
+
+//event listeners
 document.addEventListener("dragstart", event => {
     draggedRef = event.target;
 })
@@ -8,6 +14,7 @@ document.addEventListener("dragover", event => {
 })
 
 document.addEventListener("drop", event => {
+  if(gameEnd) {alert(winner + " has won the game!");return;}
   const move=document.getElementById("move");
   if(event.target.id[0]!=draggedRef.id[0]) {
     if(move.className[0]!=draggedRef.id[0]||!isvalid(
@@ -29,6 +36,7 @@ document.addEventListener("drop", event => {
   } 
 })
 
+//functions
 function movePiece(event) {
   removeHighlights();
   if(event.target.className==="piece") {
@@ -128,14 +136,23 @@ function isvalid(from, to, piece, is_capture, event) {
   } else {
     alert("You broke the game!, How??");
   }
-  //check if non-knights jump over pieces
+  //check if non-knights jump over piece
   if (is_capture) {
     if(event.target.id.slice(1)=="king") {
-      let winner="black";
       if (color=="w") {winner="white";}
       alert(winner + " has won the game!");
+      gameEnd=true;
       return false;
     }
   }
+  var txs=(is_capture)?"x":"";
+  moves.push(filt(piece)+txs+to);
   return true;
 }
+
+function filt(piece) {
+  var r=(piece=="knight")?"n":piece[0];
+  r=(piece=="pawn")?"":r;
+  return r;
+}
+
