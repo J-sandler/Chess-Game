@@ -4,6 +4,7 @@ const moves=[];
 let winner="black";
 var gameEnd=false;
 var tempEval=0;
+var moveNum=1;
 
 
 //event listeners
@@ -158,15 +159,23 @@ function isvalid(from, to, piece, is_capture, event) {
       return false;
     } 
   }
+  
   var txs=(is_capture)?"x":"";
-  moves.push(filt(piece)+txs+to);
+  moves.push(filt(piece,is_capture,from)+txs+to);
+  
+  moveNum=(color=="b")?moveNum+1:moveNum;
+  moves_update(color);
+  
   eval_update();
+
   return true;
 }
 
-function filt(piece) {
-  var r=(piece=="knight")?"n":piece[0];
-  r=(piece=="pawn")?"":r;
+//helper method for move notation
+function filt(piece,is_capture,from) {
+  var r=(piece=="knight")?"N":piece[0].toUpperCase();
+  r=(piece=="pawn"&&is_capture)?from[0]:r;
+  r=(piece=="pawn"&&!is_capture)?"":r;
   return r;
 }
 
@@ -185,12 +194,31 @@ function piece_val(piece) {
 
 //eval mechanics:
 function get_eval() {
-  //temporary implementation:
+  //[temp implementation] (soon to include nn eval)
   return tempEval;
 }
 
+//update eval bar
 function eval_update() {
   var r=document.querySelector(":root");
   var s=(329.75-(get_eval()*20))+"px";
   r.style.setProperty('--h',s);
+}
+
+//updates moves column
+function moves_update(color) {
+  if(moves.length>=60)return;
+
+  var el=document.getElementById("played-moves");
+
+  var txt=(color=="w")?moveNum+ ": "+moves[moves.length-1]:" "+moves[moves.length-1]+"<br>";
+
+  txt=(is_check())?txt+"+":txt;
+  el.innerHTML+=txt;
+}
+
+//evaluates check
+function is_check() {
+  //[temp implementation]:
+  return false;
 }
