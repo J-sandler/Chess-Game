@@ -3,6 +3,8 @@ var draggedRef = null;
 const moves=[];
 let winner="black";
 var gameEnd=false;
+var tempEval=0;
+
 
 //event listeners
 document.addEventListener("dragstart", event => {
@@ -39,6 +41,11 @@ document.addEventListener("drop", event => {
 //functions
 function movePiece(event) {
   removeHighlights();
+
+  var el=document.getElementById("eval-box");
+  var s="eval: "+get_eval().toString();
+  el.innerText=s;
+
   if(event.target.className==="piece") {
     var p=event.target.parentNode;
     p.innerHtml="";
@@ -75,13 +82,14 @@ function isvalid(from, to, piece, is_capture, event) {
   //establish x and y movement 
   let y=parseInt(to[1])-parseInt(from[1]);let x=parseInt(to[0],18)-parseInt(from[0],18);
   x=Math.abs(x);
-
+  y=(piece!="pawn")?Math.abs(y):y;
+  
   //evaluate x and y movement given the piece moving
   if (piece=="pawn") {
     let starting_rank=parseInt(from[1]);
     if (!is_capture) {
       if (x) {
-        //unless is enpessant
+        //unless is enpassant
         return false;
       }
     } 
@@ -105,48 +113,54 @@ function isvalid(from, to, piece, is_capture, event) {
     if(y<0||y>2) {
       return false;
     }
+
   } else if (piece=="bish") {
-    y=Math.abs(y);
     if(y!=x) {
       return false;
     }
   } else if (piece=="knight") {
-    y=Math.abs(y);
     let val=((y==2&&x==1)||(x==2&&y==1));
     if (!val) {
       return false;
     } 
   } else if (piece=="king") {
-    y=Math.abs(y);
     if(x>1||y>1) {
       //unless castle is valid
       return false;
     }
   } else if (piece=="queen") {
-    y=Math.abs(y);
     let val=(y==0||x==0||y==x);
     if(!val) {
       return false;
     }
   } else if (piece=="rook") {
-    y=Math.abs(y);
     if(y!=0&&x!=0) {
       return false;
     }
   } else {
     alert("You broke the game!, How??");
   }
-  //check if non-knights jump over piece
+
+  //update eval [temporary]:
+  if (is_capture) {
+    if (color=="w") {
+      tempEval+=piece_val(event.target.id.slice(1));
+    } else {
+      tempEval-=piece_val(event.target.id.slice(1));
+    }
+  }
+  //check if non-knights jump over pieces
   if (is_capture) {
     if(event.target.id.slice(1)=="king") {
       if (color=="w") {winner="white";}
       alert(winner + " has won the game!");
       gameEnd=true;
       return false;
-    }
+    } 
   }
   var txs=(is_capture)?"x":"";
   moves.push(filt(piece)+txs+to);
+  eval_update();
   return true;
 }
 
@@ -156,3 +170,27 @@ function filt(piece) {
   return r;
 }
 
+function piece_val(piece) {
+  if (piece=="pawn") {
+    return 1;
+  } 
+  if (piece=="knight"||piece=="bish") {
+    return 3;
+  } 
+  if(piece=="rook") {
+    return 5;
+  }
+  return (piece=="queen")?9:99999;
+}
+
+//eval mechanics:
+function get_eval() {
+  //temporary implementation:
+  return tempEval;
+}
+
+function eval_update() {
+  var r=document.querySelector(":root");
+  var s=(329.75-(get_eval()*20))+"px";
+  r.style.setProperty('--h',s);
+}
